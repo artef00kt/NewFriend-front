@@ -24,11 +24,13 @@
     // position: relative;
     width: 1440px;
     // width: 100%;
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 160px - 50px);
+    // min-height: 730px;
     
     background-color: #FFFFFF;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px;
 
     margin-left: auto;
     margin-right: auto;
 }
+

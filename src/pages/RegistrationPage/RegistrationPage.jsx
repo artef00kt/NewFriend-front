@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from './LoginPage.module.scss';
+import styles from './RegistrationPage.module.scss';
 
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 import InputA from "../../components/InputA/InputA.jsx"
 import TitleText from "../../components/TitleText/TitleText.jsx"
 
-const LoginPage = () => {
+const RegistrationPage = () => {
 
     const [formData, setFormData] = useState({
         login: '',
@@ -22,8 +22,8 @@ const LoginPage = () => {
     }
 
     return (
-        <section className={styles.loginContaineer + " " + styles.loginPage}>
-            <TitleText> Вход </TitleText>
+        <section className={styles.registrationContaineer + " " + styles.registrationPage}>
+            <TitleText> Регистрация </TitleText>
             <form onSubmit={onSubmitForm} style={{display: "contents"}}>
                 <div style={{marginTop: 40 + "px"}}>
                     <InputA 
@@ -32,6 +32,9 @@ const LoginPage = () => {
                         name={"login"}
                         type={"text"}
                         placeholder={"Логин"}/>
+                </div>
+                <div className={styles.errorLoginText}>
+                    <p>Логин уже занят</p>
                 </div>
 
                 <div style={{marginTop: 15 + "px"}}>
@@ -42,20 +45,28 @@ const LoginPage = () => {
                         type={"password"}
                         placeholder={"Пароль"}/>
                 </div>
-                <div className={styles.errorLoginText}>
-                    <p>Неверный логин или пароль</p>
-                </div>
+
                 <div style={{marginTop: 15 + "px"}}>
+                    <InputA 
+                        customwidth={350}
+                        onChange={onChangeForm}
+                        name={"repeatPassword"}
+                        type={"password"}
+                        placeholder={"Повторите пароль"}/>
+                </div>
+                <div className={styles.errorLoginText}>
+                    <p>Пароли не совпадают</p>
+                </div>
+                <div style={{marginTop: 20 + "px"}}>
                     <ButtonA 
-                        text={"Войти"} 
+                        text={"Зарегистрироваться"} 
                         type={"submit"}/>
                 </div>
             </form>
-                <p className={styles.noAccountText}>Нет аккаунта? <Link to="/registration">Регистрация</Link></p> 
-                {/* <p className={styles.noAccountText}>Есть аккаунт? <Link to="/login">Войти</Link></p> */}
+            <p className={styles.noAccountText}>Есть аккаунт? <Link to="/login">Войти</Link></p>
             
         </section>
     );
 }
 
-export default LoginPage;
+export default RegistrationPage;
