@@ -1,0 +1,21 @@
+@import "../../components/StylesBase.scss";
+
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.noAccountText {
+    margin: 4px 0 0 0;
+    color: #414141;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+
+    & > a {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        color:#6D50BF;
+    }
+}

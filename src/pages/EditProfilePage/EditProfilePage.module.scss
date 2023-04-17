@@ -1,0 +1,108 @@
+@import "../../components/StylesBase.scss";
+
+.editProfilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.charactPhotoContaineer {
+    display: flex;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.charactContaineer {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+
+}
+
+.sexButtonsContaineer {
+    width: 100%;
+    display: flex;
+    // justify-content: space-around;
+    gap: 20px;
+
+}
+
+.confirmButtonsContaineer {
+    width: 100%;
+
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+
+}
+
+
+
+.inputImageContaineer {
+    width: 250px;
+    height: 260px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputImageLabel {
+    width: 160px;
+    height: 210px;
+
+    background-color: #F5F6F8;
+    border-radius: 10px;
+}
+
+.inputImage{
+    position: absolute;
+    z-index: -1;
+}
+
+
+
+
+
+
+
+.inputTextAreaA {
+    height: 150px;
+    width: 600px;
+
+    border-radius: 10px;
+
+    background-color: #F5F6F8;
+
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    border: none;
+    outline: none;
+
+    box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 83%;
+    letter-spacing: 2px;
+    color: #414141;
+    
+    resize: none;
+
+    &::placeholder {
+        color: #A5A3A3;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 83%;
+        letter-spacing: 2px;
+    }
+}
