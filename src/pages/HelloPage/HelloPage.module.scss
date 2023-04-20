@@ -8,6 +8,10 @@
 
 .leftHello {
     min-width: 60%;
+
+    display: flex;
+    align-items: center;
+    // justify-content: center;
 }
 
 .rightHello {
@@ -40,5 +44,14 @@
 
 .helloLogo {
     @include logo(484px, 174px);
+}
+
+.leftHelloImage {
+    background-image: url("../../img/helloLeft.png");
+    width: 600px;
+    height: 570px;
+    background-size: 600px auto;
+
+    margin-left: 70px;
 }
 

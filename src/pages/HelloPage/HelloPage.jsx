@@ -13,6 +13,7 @@ const HelloPage = () => {
     return(
         <section className={styles.contentContaineer + " " + styles.helloPageDelimiter}>
             <div className={styles.leftHello}>
+                <div className={styles.leftHelloImage}/>
 
             </div>
             <div className={styles.rightHello}>
