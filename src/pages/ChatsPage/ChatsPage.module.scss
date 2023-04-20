@@ -1,1 +1,116 @@
 @import "../../components/StylesBase.scss";
+
+.chatPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    padding: 30px;
+}
+
+.chatUsersList {
+    max-height: calc(100vh - 160px - 50px - 60px);;
+    
+    padding-right: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    overflow: auto;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    border-right: 3px solid #ececec;
+
+
+    box-sizing: border-box;
+
+
+}
+
+
+
+.chatUserCard {
+    width: 460px;
+    height: 110px;
+
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 5px;
+
+    display: flex;
+
+    cursor: pointer;
+
+    &_act {
+        background-color: #bcb0e2;
+        &:hover {
+            background-color: #ab9fd3;
+        }
+    }
+
+    &_noAct {
+        background-color: #FFFFFF;
+        &:hover {
+            background-color: #ebebeb;
+        }
+    }
+
+
+
+    &__photo {
+        width: 100px;
+        height: 100px;
+
+        box-sizing: border-box;
+        border-radius: 10px;
+
+        background-image: url("https://sun7-22.userapi.com/impg/KLJUrOV4jf0hcP0-fL0exLX55R7ABbaDZoJhWg/p8C0ettpw1c.jpg?size=1365x2048&quality=95&sign=bd4b17982cb3f237310c843f538657b8&type=album");
+        background-size: 100px auto;
+    }
+
+    &__text {
+        width: calc(100% - 110px);
+
+        margin: 0 0 0 10px;
+
+        display: flex;
+        flex-direction: column;
+
+        &_name {
+            margin: 10px 0 0 0;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 20px;
+
+            color: #414141;
+        }
+
+        &_lastMessage {
+            padding: 0 10px 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            
+
+            letter-spacing: 1px;
+
+            color: #414141;
+        }
+    }
+}

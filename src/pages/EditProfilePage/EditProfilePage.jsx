@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from './EditProfilePage.module.scss';
 
+import { useNavigate } from "react-router-dom";
+
 import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 import InputA from "../../components/InputA/InputA.jsx"
 import TitleText from "../../components/TitleText/TitleText.jsx"
 
 const EditProfilePage = () => {
+    const navigate = useNavigate();
+    const goMyProfile = () => { navigate('/myprofile') }
+
     const [sexBtn, setSexBtn] = useState(true);
     const manBtn = () => {setSexBtn(true); setFormData({...formData, sex: 'M'});};
     const womanBtn = () => {setSexBtn(false); setFormData({...formData, sex: 'W'});};
@@ -14,10 +19,6 @@ const EditProfilePage = () => {
         e.preventDefault();
         console.log(formData);
         // console.log(sexBtn);
-    }
-
-    const backBtnClick = () => {
-        console.log("back");
     }
 
     const [formData, setFormData] = useState({
@@ -87,7 +88,7 @@ const EditProfilePage = () => {
 
                 <div className={styles.confirmButtonsContaineer}>
                     <ButtonA 
-                        onClick={backBtnClick}
+                        onClick={goMyProfile}
                         type={"button"}
                         text={"Отмена"}/>
 

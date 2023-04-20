@@ -10,6 +10,12 @@ import EditProfilePage from './pages/EditProfilePage/EditProfilePage.jsx'
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
 import FindFriendPage from './pages/FindFriendPage/FindFriendPage.jsx'
 import ChatsPage from './pages/ChatsPage/ChatsPage.jsx'
+import ChatPlace from './pages/ChatsPage/ChatPlace/ChatPlace.jsx'
+import MyProfilePage from './pages/MyProfilePage/MyProfilePage.jsx'
+
+
+
+
 
 
 
@@ -22,10 +28,16 @@ function App() {
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/registration" element={<RegistrationPage />}/>
 
-          <Route path="/chats" element={<ChatsPage />}/>
+          <Route path="/chats" element={<ChatsPage />} >
+            <Route path=":id" element={<ChatPlace />}/>
+          </Route>
+
           <Route path="/findfriend" element={<FindFriendPage />}/>
 
           <Route path="/editprofile" element={<EditProfilePage />}/>
+
+          <Route path="/myprofile" element={<MyProfilePage />}/>
+
 
           <Route path="*" element={<ErrorPage />}/>
         </Route>

@@ -1,23 +1,21 @@
 import { React } from 'react'
-import styles from './FindFriendPage.module.scss';
+import styles from './MyProfilePage.module.scss';
+import { useNavigate } from "react-router-dom";
 
 import TitleText from "../../components/TitleText/TitleText.jsx"
-// import ButtonA from "../../components/ButtonA/ButtonA.jsx"
+import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 
-const FindFriendPage = () => {
 
-    const beFr = () => {
-        console.log("дружить");
-    }
-    
-    const notBeFr = () => {
-        console.log("не дружить");
-    }
+const MyProfile = () => {
+    const navigate = useNavigate();
+
+    const goEdit = () => { navigate('/editprofile') }
+
 
     return(
         <div className={styles.contentContaineer + " " + styles.ffPage}>
             <div style={{marginTop: 30 + "px"}}>
-                <TitleText> Поиск друзей</TitleText>
+                <TitleText> Ваш профиль</TitleText>
             </div>
             <div style={{marginTop: 50 + "px", marginBottom: 30 + "px"}}>
                 <div className={styles.ffCardContaineer}>
@@ -40,25 +38,14 @@ const FindFriendPage = () => {
 
 
                     </div>
-                    <div className={styles.btnsContaineer}>
-                        <BtnsB onClick={notBeFr} stl={false}>Не дружить</BtnsB>
-                        <BtnsB onClick={beFr} stl={true}>Дружить</BtnsB>
-                    </div>
                 </div>
+            </div>
+            <div>
+                <ButtonA text={"Редактировать профиль"} onClick={goEdit} />
             </div>
             
         </div>
     );
 }
 
-
-const BtnsB = ({stl=true, children, ...props}) => {
-    const additStyle = stl ? styles.btnsB_acpt : styles.btnsB_deny;
-    return (
-        <button className={styles.btnsB + " " + additStyle} {...props}>
-            {children}
-        </button>
-    );
-}
-
-export default FindFriendPage;
+export default MyProfile;

@@ -1,0 +1,94 @@
+@import "../../components/StylesBase.scss";
+
+.ffPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ffCardContaineer {
+    width: 800px;
+    height: 100%;
+
+    padding: 35px;
+
+    background: #F5F6F8;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+.photoPlug {
+    background: #FFFFFF;
+    background-image: url('https://sun7-22.userapi.com/impg/KLJUrOV4jf0hcP0-fL0exLX55R7ABbaDZoJhWg/p8C0ettpw1c.jpg?size=1365x2048&quality=95&sign=bd4b17982cb3f237310c843f538657b8&type=album');
+
+    background-size: 240px auto;
+
+    min-width: 240px;
+    min-height: 315px;
+
+    max-width: 240px;
+    max-height: 315px;
+
+    border-radius: 10px;
+}
+
+.informContaineer {
+    display: flex;
+    gap: 35px;
+}
+
+.infTextContaineer {
+    & > p, .infCity {
+        margin: 0;
+
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 104%;
+        letter-spacing: 2px;
+        color: #414141;
+    }
+
+    & > p {
+        margin-bottom: 5x;
+    }
+}
+
+.infName {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    color: #414141;
+}
+
+.nameCity {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.manyTextInfCont {
+    & > p {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 104%;
+        letter-spacing: 2px;
+        color: #414141;
+    }
+
+    height: 215px;
+
+    margin-top: 10px;
+    overflow: auto;
+
+    
+}

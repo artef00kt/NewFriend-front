@@ -1,0 +1,147 @@
+@import "../../../components/StylesBase.scss";
+
+.chatPlace {
+    width: 860px;
+    margin-left: 30px;
+
+    &__messages {
+        height: calc(100vh - 160px - 50px - 60px - 50px);
+        
+        display: flex;
+        flex-direction: column-reverse;
+        
+        overflow: auto;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+    }
+
+    &__sendMessage {
+        
+        display: flex;
+        gap: 20px;
+        box-sizing: border-box; 
+
+        & > input {
+            width: 100%;
+            height: 50px;
+            
+
+            border-radius: 10px;
+
+            background-color: #F5F6F8;
+
+            padding-left: 20px;
+            padding-right: 20px;
+        
+            border: none;
+            outline: none;
+        
+            box-sizing: border-box;
+        
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 83%;
+            letter-spacing: 2px;
+            color: #414141;
+            
+            &::placeholder {
+                color: #A5A3A3;
+            }
+        }
+
+        & > button {
+            border: none;
+            border-radius: 10px;
+
+            padding: 0 20px;
+            
+            font-family: 'Roboto' sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            letter-spacing: 2px;
+
+            background-color: #6D50BF;
+            color: #FFFFFF;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #6549b0;
+                color: #e1e1e1;
+            }
+
+            &:active {
+                background-color: #6D50BF;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+
+.messageContaineer {
+    margin: 0 0 20px 0;
+
+    &My{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    &Their{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.messageBox {
+
+    max-width: 500px;
+
+    border-radius: 10px;
+
+    
+
+    &_my {
+        background-color: #ccc1e9;
+        color: #5d5969;
+    }
+
+    &_their {
+        background-color: #F5F6F8;
+        color: #666666;
+    }
+
+    &__text {
+        margin: 10px 20px;
+
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 120%;
+        letter-spacing: 2px;
+
+        
+    }
+
+    &__date {
+        margin: 5px 10px 5px 20px;
+
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+
+        text-align: right;
+
+        
+    }
+
+}
