@@ -1,0 +1,123 @@
+@import "../../components/StylesBase.scss";
+
+.photoPlug {
+    background: #FFFFFF;
+    background-image: url('https://sun7-22.userapi.com/impg/KLJUrOV4jf0hcP0-fL0exLX55R7ABbaDZoJhWg/p8C0ettpw1c.jpg?size=1365x2048&quality=95&sign=bd4b17982cb3f237310c843f538657b8&type=album');
+
+    background-size: 240px auto;
+
+    min-width: 240px;
+    min-height: 315px;
+
+    max-width: 240px;
+    max-height: 315px;
+
+    // background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.cardContaineer {
+    width: 1000px;
+    // height: 100%;
+
+    padding: 20px;
+
+    background: #F5F6F8;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+
+    &__inform {
+        display: flex;
+    }
+
+    &__complain{
+        margin: 10px 0;
+        & > p {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 104%;
+            letter-spacing: 2px;
+            color: #414141;
+
+            & > span {
+                font-weight: 700;
+            }
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.informContaineer {
+    margin-left: 20px;
+    // display: flex;
+    // gap: 35px;
+
+    & > p {
+        margin: 5px 0 0 0;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 104%;
+        letter-spacing: 2px;
+        color: #414141;
+    }
+
+    &__description {
+        & > p {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 104%;
+            letter-spacing: 2px;
+            color: #414141;
+        }
+        height: 210px;
+        margin-top: 10px;
+        overflow: auto;
+    }
+
+    &__nc {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        &_name{
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 20px;
+            letter-spacing: 2px;
+            color: #414141;
+        }
+
+        &_city{
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 104%;
+            letter-spacing: 2px;
+            color: #414141;
+        }
+    }
+}

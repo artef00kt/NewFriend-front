@@ -37,9 +37,8 @@ const FindFriendPage = () => {
                                 </p>
                             </div>
                         </div>
-
-
                     </div>
+                    
                     <div className={styles.btnsContaineer}>
                         <BtnsB onClick={notBeFr} stl={false}>Не дружить</BtnsB>
                         <BtnsB onClick={beFr} stl={true}>Дружить</BtnsB>

@@ -14,7 +14,7 @@ import ChatPlace from './pages/ChatsPage/ChatPlace/ChatPlace.jsx'
 import MyProfilePage from './pages/MyProfilePage/MyProfilePage.jsx'
 
 
-
+import AdminPage from './pages/AdminPage/AdminPage.jsx'
 
 
 
@@ -37,6 +37,9 @@ function App() {
           <Route path="/editprofile" element={<EditProfilePage />}/>
 
           <Route path="/myprofile" element={<MyProfilePage />}/>
+
+          <Route path="/admin/complains" element={<AdminPage />}/>
+          <Route path="/admin/verifications" element={<AdminPage />}/>
 
 
           <Route path="*" element={<ErrorPage />}/>
