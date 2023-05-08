@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from './LoginPage.module.scss';
 
 import { Link } from 'react-router-dom';
@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 import InputA from "../../components/InputA/InputA.jsx"
 import TitleText from "../../components/TitleText/TitleText.jsx"
+import { Context } from "../..";
 
 const LoginPage = () => {
+    const {store} = useContext(Context);
 
     const [formData, setFormData] = useState({
         login: '',
@@ -19,6 +21,7 @@ const LoginPage = () => {
         e.preventDefault();
         console.log("это страница логина");
         console.log(formData);
+        store.login(formData.login, formData.password);
     }
 
     return (
