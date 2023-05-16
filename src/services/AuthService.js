@@ -3,10 +3,15 @@ import $api from "../http/indexHTTP"
 export default class AuthService {
 
     static async login(login, password) {
-        return $api.post('/auth/login', {"login":login, "password":password})
-            .then((response) => {
-                console.log(response);
-            });
+        const dataSend = {
+            "login" : login, 
+            "password" : password
+        };
+        console.log(dataSend);
+        return $api.post('/auth/login', dataSend)
+            // .then((response) => {
+            //     console.log(response);
+            // });
     }
 
     static async registration(login, password) {

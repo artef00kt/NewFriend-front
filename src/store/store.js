@@ -22,12 +22,16 @@ export default class Store {
         try {
             const response = await AuthService.login(login, password);
             console.log(response);
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('access_token', response.data["access_token"]);
+            localStorage.setItem('refresh_token', response.data["refresh_token"]);
             this.setAuth(true);
-            this.setUser(response.data.user);
+            this.setUser({
+                "login" : login, 
+                "role" : response.data["Authorities"]
+            });
         }
         catch (e) {
-            console.log(e.response?.data?.message)
+            console.log(e.response?.data?.message);
         }
     }
 
@@ -40,7 +44,7 @@ export default class Store {
             this.setUser(response.data.user);
         }
         catch (e) {
-            console.log(e.response?.data?.message)
+            console.log(e.response?.data?.message);
         }
     }
 
@@ -53,7 +57,16 @@ export default class Store {
             this.setUser({});
         }
         catch (e) {
-            console.log(e.response?.data?.message)
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async checkAuth() {
+        try {
+
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
         }
     }
 }

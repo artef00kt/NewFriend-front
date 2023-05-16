@@ -26,7 +26,9 @@
     @include logo(306px, 110px);
     margin-right: 110px;
     margin-left: 20px;
-    
+}
+
+.clickedLogo {
     cursor: pointer;
 }
 
