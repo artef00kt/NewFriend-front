@@ -1,5 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import AuthService from "../services/AuthService.js";
+import axios from 'axios';
+import { API_URL } from "../http/indexHTTP.js";
 
 
 export default class Store {
@@ -21,13 +23,14 @@ export default class Store {
     async login(login, password) {
         try {
             const response = await AuthService.login(login, password);
-            console.log(response);
+            //console.log(response);
             localStorage.setItem('access_token', response.data["access_token"]);
             localStorage.setItem('refresh_token', response.data["refresh_token"]);
+
             this.setAuth(true);
             this.setUser({
-                "login" : login, 
-                "role" : response.data["Authorities"]
+                "login" : response.data["login"], 
+                "role" : response.data["authority"]
             });
         }
         catch (e) {
@@ -39,9 +42,14 @@ export default class Store {
         try {
             const response = await AuthService.registration(login, password);
             console.log(response);
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('access_token', response.data["access_token"]);
+            localStorage.setItem('refresh_token', response.data["refresh_token"]);
+
             this.setAuth(true);
-            this.setUser(response.data.user);
+            this.setUser({
+                "login" : response.data["login"], 
+                "role" : response.data["authority"]
+            });
         }
         catch (e) {
             console.log(e.response?.data?.message);
@@ -52,7 +60,8 @@ export default class Store {
         try {
             const response = await AuthService.logout();
             console.log(response);
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
             this.setAuth(false);
             this.setUser({});
         }
@@ -63,6 +72,13 @@ export default class Store {
 
     async checkAuth() {
         try {
+            const response = await axios.get(`${API_URL}/auth/showUserInfo`, {
+                withCredentials: true,
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('access_token')
+                }
+            })
+            console.log(response);
 
         }
         catch (e) {

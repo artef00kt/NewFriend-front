@@ -7,15 +7,17 @@ export default class AuthService {
             "login" : login, 
             "password" : password
         };
-        console.log(dataSend);
-        return $api.post('/auth/login', dataSend)
-            // .then((response) => {
-            //     console.log(response);
-            // });
+
+        return $api.post('/auth/login', dataSend);
     }
 
     static async registration(login, password) {
-        return $api.post('/auth/registration', {login, password});
+        const dataSend = {
+            "login" : login, 
+            "password" : password
+        };
+
+        return $api.post('/auth/registration', dataSend);
     }
 
     static async logout() {

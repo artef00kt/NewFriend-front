@@ -1,6 +1,6 @@
 import styles from './App.module.scss';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
 // import { Routes, Route } from 'react-router-dom'
@@ -30,14 +30,18 @@ import AdminScenarios from './scenarios/AdminScenarios/AdminScenarios.jsx'
 
 function App() {
   const {store} = useContext(Context);
-
+  // useEffect(() =>{ 
+  //   store.checkAuth();
+  // }, []) 
+  
   // console.log(store.user);
+  const a = () =>{store.checkAuth()};
   return (
     <div className={styles.app}>
       <h1>{store.isAuth ? `авторизован ${store.user.login}` : `не авторизован`}</h1>
-      {/* <GuestScenarios /> */}
-      <AdminScenarios />
 
+      <GuestScenarios />
+      <button onClick={a}>asd</button>
     </div>
   );
 }
