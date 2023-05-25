@@ -13,16 +13,30 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const {store} = useContext(Context);
 
+    const [errLg, setErrLg] = useState(false);
     const [formData, setFormData] = useState({
         login: '',
         password: '',
     });
 
-    const onChangeForm = (e) => {setFormData({...formData, [e.target.name]: e.target.value})}
+    const onChangeForm = (e) => {setFormData({...formData, [e.target.name]: e.target.value}); setErrLg(false);}
     const onSubmitForm = (e) => {
         e.preventDefault();
-        store.login(formData.login, formData.password);
-        navigate('/');
+        console.log(formData);
+        if (!(formData.login === '' || formData.password === '')) {
+            store.login(formData.login, formData.password).then((res) => {
+                if (typeof res === 'undefined')
+                    navigate('/');
+                else {
+                    setErrLg(true);
+                    e.target.reset();
+                    setFormData({
+                        login: '',
+                        password: '',
+                    })
+                }
+            });
+        }
     }
 
     return (
@@ -47,7 +61,7 @@ const LoginPage = () => {
                         placeholder={"Пароль"}/>
                 </div>
                 <div className={styles.errorLoginText}>
-                    <p>Неверный логин или пароль</p>
+                    <p>{errLg ? 'Неверный логин или пароль' : ''}</p>
                 </div>
                 <div style={{marginTop: 15 + "px"}}>
                     <ButtonA 

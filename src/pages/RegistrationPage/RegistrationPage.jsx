@@ -13,16 +13,39 @@ const RegistrationPage = () => {
     const navigate = useNavigate();
     const {store} = useContext(Context);
 
+    const [errLg, setErrLg] = useState(false);
+    const [errPswrd, setErrPswrd] = useState(false);
+
     const [formData, setFormData] = useState({
         login: '',
         password: '',
+        repeatPassword: '',
     });
 
-    const onChangeForm = (e) => {setFormData({...formData, [e.target.name]: e.target.value})}
+    const onChangeForm = (e) => {setFormData({...formData, [e.target.name]: e.target.value}); setErrPswrd(false); setErrLg(false);}
     const onSubmitForm = (e) => {
         e.preventDefault();
-        store.registration(formData.login, formData.password);
-        navigate('/');
+        if (!(formData.login === '' || formData.password === '' || formData.repeatPassword === '')) {
+            if (formData.password === formData.repeatPassword) {
+                store.registration(formData.login, formData.password).then((res) => {
+                    if (typeof res === 'undefined')
+                        navigate('/');
+                    else {
+                        setErrLg(true);
+                        e.target.reset();
+                        setFormData({
+                            login: '',
+                            password: '',
+                            repeatPassword: '',
+                        })
+                    }
+                });
+            }
+            else {
+                setErrPswrd(true);
+            }
+        }
+        
     }
 
     return (
@@ -38,7 +61,7 @@ const RegistrationPage = () => {
                         placeholder={"Логин"}/>
                 </div>
                 <div className={styles.errorLoginText}>
-                    <p>Логин уже занят</p>
+                    <p>{ errLg ? 'Логин уже занят' : ''}</p>
                 </div>
 
                 <div style={{marginTop: 15 + "px"}}>
@@ -59,7 +82,7 @@ const RegistrationPage = () => {
                         placeholder={"Повторите пароль"}/>
                 </div>
                 <div className={styles.errorLoginText}>
-                    <p>Пароли не совпадают</p>
+                    <p>{ errPswrd ? 'Пароли не совпадают' : '' }</p>
                 </div>
                 <div style={{marginTop: 20 + "px"}}>
                     <ButtonA 

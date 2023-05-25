@@ -52,6 +52,7 @@ export default class Store {
         }
         catch (e) {
             console.log(e.response?.data?.message);
+            return e.response.status;
         }
     }
 
@@ -75,6 +76,7 @@ export default class Store {
         }
         catch (e) {
             console.log(e.response?.data?.message);
+            return e.response.status;
         }
     }
 
@@ -164,6 +166,10 @@ export default class Store {
         }
     }
 
+
+    //////////////////////
+    ////// NEW USER //////
+    //////////////////////
 
 
 
