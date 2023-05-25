@@ -1,5 +1,6 @@
 import { React } from 'react';
 import { Routes, Route } from 'react-router-dom'
+import { observer } from 'mobx-react-lite';
 
 import Header from '../../components/Header/Header.jsx'
 import ErrorPage from '../../pages/ErrorPage/ErrorPage.jsx'
@@ -18,9 +19,9 @@ const UserScenarios = () => {
     return (
     <Routes>
         <Route path="/" element={<Header type="user"/>}>
-            <Route index element={<ErrorPage />}/>
+            <Route index element={<MyProfilePage />}/>
 
-            <Route path="/myprofile" element={<MyProfilePage />}/>
+            {/* <Route path="/myprofile" element={<MyProfilePage />}/> */}
             <Route path="/editprofile" element={<EditProfilePage />}/>
             
             <Route path="/chats" element={<ChatsPage />} >
@@ -34,4 +35,4 @@ const UserScenarios = () => {
     );
 };
 
-export default UserScenarios;
+export default observer(UserScenarios);

@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from './RegistrationPage.module.scss';
 
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 import InputA from "../../components/InputA/InputA.jsx"
 import TitleText from "../../components/TitleText/TitleText.jsx"
+import { Context } from "../..";
 
 const RegistrationPage = () => {
+    const navigate = useNavigate();
+    const {store} = useContext(Context);
 
     const [formData, setFormData] = useState({
         login: '',
@@ -17,8 +21,8 @@ const RegistrationPage = () => {
     const onChangeForm = (e) => {setFormData({...formData, [e.target.name]: e.target.value})}
     const onSubmitForm = (e) => {
         e.preventDefault();
-        console.log("это страница логина");
-        console.log(formData);
+        store.registration(formData.login, formData.password);
+        navigate('/');
     }
 
     return (
@@ -64,7 +68,6 @@ const RegistrationPage = () => {
                 </div>
             </form>
             <p className={styles.noAccountText}>Есть аккаунт? <Link to="/login">Войти</Link></p>
-            
         </section>
     );
 }

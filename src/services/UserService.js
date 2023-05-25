@@ -6,4 +6,15 @@ export default class UserService {
         return $api.get('/users');
     }
 
+    static fetchChatUsers() {
+        return $api.get('/messenger');
+    }
+
+    static fetchMessages(user) {
+        return $api.get('/messenger/' + user);
+    }
+
+    static fetchNewMessage(data) {
+        return $api.put('/messenger', data);
+    }
 };

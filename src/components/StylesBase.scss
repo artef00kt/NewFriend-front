@@ -20,6 +20,17 @@
     }
 }
 
+.logoutIcon {
+    background-image: url("../img/logoutIcon.svg");
+    width: 147px;
+    height: 39px;
+
+    &:hover {
+        //background-image: url("../img/loginIconHovered.svg");
+        filter: grayscale(35%);
+    }
+}
+
 .contentContaineer {
     // position: relative;
     width: 1440px;

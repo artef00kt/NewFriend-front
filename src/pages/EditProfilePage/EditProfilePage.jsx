@@ -9,7 +9,7 @@ import TitleText from "../../components/TitleText/TitleText.jsx"
 
 const EditProfilePage = () => {
     const navigate = useNavigate();
-    const goMyProfile = () => { navigate('/myprofile') }
+    const goBack = () => { navigate(-1) }
 
     const [sexBtn, setSexBtn] = useState(true);
     const manBtn = () => {setSexBtn(true); setFormData({...formData, sex: 'M'});};
@@ -88,7 +88,7 @@ const EditProfilePage = () => {
 
                 <div className={styles.confirmButtonsContaineer}>
                     <ButtonA 
-                        onClick={goMyProfile}
+                        onClick={goBack}
                         type={"button"}
                         text={"Отмена"}/>
 

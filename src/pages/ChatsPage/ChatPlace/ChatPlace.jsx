@@ -1,54 +1,47 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useOutletContext } from 'react-router-dom';
+
+import { observer } from 'mobx-react-lite';
+
+import { Context } from '../../../';
 
 import styles from './ChatPlace.module.scss';
 
 const ChatPlace = () => {
+    const {store} = useContext(Context);
     const {id} = useParams();
-    const sre = "капец ка кмнеоо ваы ваывоваолдпдываоплывапод опыавлд одваы пролдва ырплова рплоы враплдырвапл враолывапроыолдв ролдд ролывапролдывар лоыварпдло дылвоарп ыдвлоапр ывдаолрп ыдлваопр"
-    const messageDate = [
-        {   my: true,
-            messageDate: "10.11.2002 12:22",
-            messageText: "какой-то текст 1", },
 
-        {    my: false,
-            messageDate: "10.11.2002 12:22",
-            messageText: "какой-то текст 2", },
+    const [messagesList, setMessagesList] = useState([]);
 
-        {   my: false,
-            messageDate: "10.11.2002 12:22",
-            messageText: "какой-то текст 3", },
+    const [rerender, setRerender] = useOutletContext();
 
-        {   my: false,
-            messageDate: "10.11.2002 12:22",
-            messageText: sre, },
-
-        {   my: true,
-            messageDate: "10.11.2002 12:22",
-            messageText: "какой-то текст 5", },
-
-        {   my: true,
-            messageDate: "10.11.2002 12:22",
-            messageText: sre, },
-    ];
-
-
-
+    useEffect(() => {
+        store.getMessages(id.toString()).then(response => {
+            setMessagesList(redataList(response, store.user.login));
+        });
+    }, [id, rerender])
+    
     const [sendMessage, setSendMessage] = useState('');
 
     const onChangeForm = (e) => {setSendMessage(e.target.value)};
     const onSubmitForm = (e) => {
         e.preventDefault();
-        console.log("message: ", sendMessage);
-        e.target.reset();
+        if (sendMessage != '')
+        {
+            store.sendMessage(id.toString(), sendMessage).then(() => {setRerender(rerender+1)});
+            console.log("message: ", sendMessage);
+            
+            setSendMessage('');
+            e.target.reset();
+        }
+        
     }
 
-    
     return (
         <div className={styles.chatPlace}>
             <div className={styles.chatPlace__messages}>
-                {messageDate.reverse().map((data, index) => 
+                {messagesList.reverse().map((data, index) => 
                     <Message key={index} my={data.my} date={data.messageDate}>{data.messageText}</Message>
                 )}
             </div>
@@ -73,5 +66,16 @@ const Message = ({my, date, children, ...props}) => {
     );
 }
 
+const redataList = (old_list, myLogin) => {
+    const new_list = [];
+    for (let i = 0; i < old_list.length; ++i) {
+        let obj = {}
+        obj.my = old_list[i].sender === myLogin;
+        obj.messageText = old_list[i].text;
+        obj.messageDate = old_list[i].date + " " + old_list[i].time;
+        new_list.push(obj);
+    }
+    return new_list;
+};
 
-export default ChatPlace;
+export default observer(ChatPlace);
