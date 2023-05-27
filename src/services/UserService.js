@@ -6,6 +6,7 @@ export default class UserService {
         return $api.get('/users');
     }
 
+    ////// CHAT //////
     static fetchChatUsers() {
         return $api.get('/messenger');
     }
@@ -16,5 +17,10 @@ export default class UserService {
 
     static fetchNewMessage(data) {
         return $api.put('/messenger', data);
+    }
+
+    ////// EDIT PROFILE //////
+    static fetchNewUserData(data) {
+        return $api.post('/Me/create', data);
     }
 };

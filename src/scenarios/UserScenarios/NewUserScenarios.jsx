@@ -12,7 +12,7 @@ const NewUserScenarios = () => {
     return (
     <Routes>
         <Route path="/" element={<Header type="newuser"/>}>
-            <Route index element={<ErrorPage />}/>
+            <Route index element={<EditProfilePage newuser={true} />}/>
 
             {/* <Route path="/editprofile" element={<EditProfilePage />}/> */}
 

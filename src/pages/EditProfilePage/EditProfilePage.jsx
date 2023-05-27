@@ -1,41 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from './EditProfilePage.module.scss';
 
 import { useNavigate } from "react-router-dom";
+
+import { Context } from '../../';
 
 import ButtonA from "../../components/ButtonA/ButtonA.jsx"
 import InputA from "../../components/InputA/InputA.jsx"
 import TitleText from "../../components/TitleText/TitleText.jsx"
 
-const EditProfilePage = () => {
+const EditProfilePage = (props) => {
+    const nu = props.newuser === true;
+
+    const {store} = useContext(Context);
+
     const navigate = useNavigate();
     const goBack = () => { navigate(-1) }
 
     const [sexBtn, setSexBtn] = useState(true);
     const manBtn = () => {setSexBtn(true); setFormData({...formData, sex: 'M'});};
     const womanBtn = () => {setSexBtn(false); setFormData({...formData, sex: 'W'});};
+    const [formData, setFormData] = useState({
+        login: store.user.login,
+        'name': '',
+        birthdate: '',
+        city: '',
+        image: '',
+        description: '',
+        sex: 'M',
+        zodiacSign : "Скорпион",
+    });
+
+    //const [fileData, setFileData] = useState();
+
+    const onChangeForm = (e) => setFormData({...formData, [e.target.name]: e.target.value});
+    const onChangeFormFile = (e) => setFormData({...formData, [e.target.name]: e.target.files[0]});
+    const onImage = (e) => {
+        console.log(formData.image);
+
+        const newForm = new FormData();
+        newForm.append('login', formData.login)
+        newForm.append('name', formData.name)
+        newForm.append('image', formData.image);
+        //formData.image = newForm;
+        newForm.append('sex', formData.sex)
+        newForm.append('description', formData.description)
+        newForm.append('birthdate', formData.birthdate)
+        newForm.append('city', formData.city)
+        newForm.append('zodiacSign', formData.zodiacSign)
+
+        
+
+        console.log(formData);
+        store.sendUserData(formData);
+
+    }
 
     const onSubmitForm = (e) => {
         e.preventDefault();
+
         console.log(formData);
+        store.sendUserData(formData);
         // console.log(sexBtn);
     }
-
-    const [formData, setFormData] = useState({
-        fname: '',
-        birthdate: '',
-        city: '',
-        photo: '',
-        description: '',
-        sex: 'M',
-    });
-
-    const onChangeForm = (e) => setFormData({...formData, [e.target.name]: e.target.value});
 
     return (
         <section className={styles.contentContaineer + " " + styles.editProfilePage}>
             <div style={{marginTop: 30 + "px"}}>
-                <TitleText> Редактирование профиля </TitleText>
+                <TitleText> {nu ? 'Создание профиля' : 'Редактирование профиля'} </TitleText>
             </div>
 
             <form onSubmit={onSubmitForm}>
@@ -44,7 +76,7 @@ const EditProfilePage = () => {
                         <InputA 
                             customwidth={350}
                             onChange={onChangeForm}
-                            name={"fname"}
+                            name={"name"}
                             type={"text"}
                             placeholder={"Имя"}/>
 
@@ -76,8 +108,8 @@ const EditProfilePage = () => {
                     </div>
 
                     <InputImage 
-                        onChange={onChangeForm}
-                        name={"photo"}
+                        onChange={onChangeFormFile}
+                        name={"image"}
                         id={"inputPhoto"}/>
                 </div>
 
@@ -87,10 +119,17 @@ const EditProfilePage = () => {
                     name={"description"} />
 
                 <div className={styles.confirmButtonsContaineer}>
+                    {nu ? <></> : 
                     <ButtonA 
                         onClick={goBack}
                         type={"button"}
                         text={"Отмена"}/>
+                    }
+
+                    <ButtonA 
+                        onClick={onImage}
+                        type={"button"}
+                        text={"test"}/>
 
                     <ButtonA 
                         type={"submit"}

@@ -18,7 +18,8 @@ const ChatPlace = () => {
 
     useEffect(() => {
         store.getMessages(id.toString()).then(response => {
-            setMessagesList(redataList(response, store.user.login));
+            //setMessagesList(redataList(response, store.user.login));
+            setMessagesList(response);
         });
     }, [id, rerender])
     
@@ -42,7 +43,7 @@ const ChatPlace = () => {
         <div className={styles.chatPlace}>
             <div className={styles.chatPlace__messages}>
                 {messagesList.reverse().map((data, index) => 
-                    <Message key={index} my={data.my} date={data.messageDate}>{data.messageText}</Message>
+                    <Message key={index} my={data.me} date={data.dateTime}>{data.text}</Message>
                 )}
             </div>
             <form onSubmit={onSubmitForm} id={"sendMessageForm"} className={styles.chatPlace__sendMessage}>

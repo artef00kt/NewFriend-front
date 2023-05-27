@@ -18,7 +18,8 @@ const ChatsPage = () => {
 
     useEffect(() => {
         store.getUsers().then(response => {
-            setFriendList(redataList(response, store.user.login));
+            //setFriendList(redataList(response, store.user.login));
+            setFriendList(response);
         });
     }, [rerender]);
 
@@ -28,7 +29,7 @@ const ChatsPage = () => {
             <div className={styles.chatUsersList}>
                 {friendList.map((data, index) => 
                     <Link key={data.companion} to={`${data.companion}`} style={{ textDecoration: 'none' }}>
-                        <ChatUserCard act={data.companion.toString() === id} name={data.companion} text={data.me ? "Ты: "+data.text : data.text} />
+                        <ChatUserCard act={data.companion.toString() === id} name={data.companionName} text={data.me ? "Ты: "+data.text : data.text} />
                     </Link>
                 )}
             </div>

@@ -171,7 +171,15 @@ export default class Store {
     ////// NEW USER //////
     //////////////////////
 
-
+    async sendUserData(data) {
+        try {
+            const response = await UserService.fetchNewUserData(data);
+            console.log(response);
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
 
 
 
