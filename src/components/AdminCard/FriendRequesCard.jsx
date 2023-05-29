@@ -6,17 +6,17 @@ import styles from './AdminCard.module.scss';
 
 import ButtonA from "../ButtonA/ButtonA.jsx"
 
-const AdminVerificationCard = (props) => {
+const FriendRequesCard = (props) => {
     const {store} = useContext(Context);
 
-    const verify = () => {
-        store.setVerifyUser(props.data.login).then(() => {
+    const accept = () => {
+        store.setAcceptToInvite(props.data.login).then(() => {
             props.rerender();
         })
     }
 
-    const noverify = () => {
-        store.setNoVerifyUser(props.data.login).then(() => {
+    const deny = () => {
+        store.setDenyToInvite(props.data.login).then(() => {
             props.rerender();
         })
     }
@@ -40,11 +40,11 @@ const AdminVerificationCard = (props) => {
                 </div>
             </div>
             <div className={styles.cardContaineer__buttons}>
-                <ButtonA text={"Допустить"} onClick={verify} />
-                <ButtonA text={"Не допускать"} onClick={noverify} />
+                <ButtonA text={"Дружить"} onClick={accept} />
+                <ButtonA text={"Не дружить"} onClick={deny} />
             </div>
         </div>
     );
 }
 
-export default AdminVerificationCard;
+export default FriendRequesCard;

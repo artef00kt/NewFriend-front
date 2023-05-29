@@ -1,6 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import AuthService from "../services/AuthService.js";
 import UserService from "../services/UserService.js";
+import AdminService from "../services/AdminService.js";
+
 import axios from 'axios';
 import { API_URL } from "../http/indexHTTP.js";
 
@@ -8,7 +10,6 @@ import { API_URL } from "../http/indexHTTP.js";
 export default class Store {
     user = {};
     isAuth = false;
-    isLoading = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -21,11 +22,6 @@ export default class Store {
     setUser(user) {
         this.user = user;
     }
-
-    setLoading(flag) {
-        this.isLoading = flag;
-    }
-
 
     ///////////////////////////
     ////// AUTHORIZATION //////
@@ -98,7 +94,6 @@ export default class Store {
     }
 
     async checkAuth() {
-        this.setLoading(true);
         try {
             const header = {
                 Authorization: 'Bearer ' + localStorage.getItem('access_token'),
@@ -118,8 +113,15 @@ export default class Store {
         catch (e) {
             console.log(e.response?.data?.message);
         }
-        finally {
-            this.setLoading(false);
+    }
+
+    async getUserData() {
+        try {
+            const response = await UserService.fetchUserData();
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
         }
     }
 
@@ -132,8 +134,16 @@ export default class Store {
     async getUsers() {
         try {
             const response = await UserService.fetchChatUsers();
-            //const result = response.data;
-            //console.log(result);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async getUsersEmpty() {
+        try {
+            const response = await UserService.fetchChatUsersEmpty();
             return response.data;
         }
         catch (e) {
@@ -181,6 +191,141 @@ export default class Store {
         }
     }
 
+    ///////////////////////////////
+    ////// ADMIN VERFICATION //////
+    ///////////////////////////////
 
+    async getVerificationsUsersList() {
+        try {
+            const response = await AdminService.fetchVerificationsUsersList();
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
 
+    async setVerifyUser(user) {
+        try {
+            const response = await AdminService.fetchVerifyUser(user);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async setNoVerifyUser(user) {
+        try {
+            const response = await AdminService.fetchNoVerifyUser(user);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    //////////////////////////////
+    ////// ADMIN COMPLAINTS //////
+    //////////////////////////////
+
+    async getComplaintsUsersList() {
+        try {
+            const response = await AdminService.fetchComplaintsUsersList();
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async setBanUser(id) {
+        try {
+            const response = await AdminService.fetchBanUser(id);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async setNoBanUser(id) {
+        try {
+            const response = await AdminService.fetchNoBanUser(id);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    /////////////////////////
+    ////// FIND FRIEND //////
+    /////////////////////////
+
+    async getFindFriend() {
+        try {
+            const response = await UserService.fetchFindFriend();
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async patchInviteToFriend(login) {
+        try {
+            const response = await UserService.fetchInviteToFriend(login);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async sendComplain(data) {
+        try {
+            const response = await UserService.fetchSendComplain(data);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    ///////////////////////////////////
+    ////// ADD OR NO ADD FRIENDS //////
+    ///////////////////////////////////
+
+    async getInvitesList() {
+        try {
+            const response = await UserService.fetchInvites();
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async setAcceptToInvite(login) {
+        try {
+            const response = await UserService.fetchAcceptFriendInvite(login);
+            //console.log(response.data);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
+
+    async setDenyToInvite(login) {
+        try {
+            const response = await UserService.fetchDenyFriendInvite(login);
+            //console.log(response.data);
+            return response.data;
+        }
+        catch (e) {
+            console.log(e.response?.data?.message);
+        }
+    }
 }

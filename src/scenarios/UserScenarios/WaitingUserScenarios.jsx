@@ -4,15 +4,16 @@ import { Routes, Route } from 'react-router-dom'
 import Header from '../../components/Header/Header.jsx'
 import ErrorPage from '../../pages/ErrorPage/ErrorPage.jsx'
 
-import EditProfilePage from '../../pages/EditProfilePage/EditProfilePage.jsx'
+import TextPage from '../../pages/TextPage/TextPage.jsx'
 
 
 
-const NewUserScenarios = () => {
+
+const WaitingUserScenarios = () => {
     return (
     <Routes>
-        <Route path="/" element={<Header type="newuser"/>}>
-            <Route index element={<EditProfilePage newuser={true} />}/>
+        <Route path="/" element={<Header type="waitinguser"/>}>
+            <Route index element={<TextPage text={"Ожидайте подтверждения"} />}/>
 
             <Route path="*" element={<ErrorPage />}/>
         </Route>
@@ -20,4 +21,4 @@ const NewUserScenarios = () => {
     );
 };
 
-export default NewUserScenarios;
+export default WaitingUserScenarios;

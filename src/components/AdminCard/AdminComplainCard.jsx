@@ -1,35 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { Context } from '../../';
 
 import styles from './AdminCard.module.scss';
 
 import ButtonA from "../ButtonA/ButtonA.jsx"
 
-const AdminComplainCard = () => {
+const AdminComplainCard = (props) => {
+    const {store} = useContext(Context);
+
+    const ban = () => {
+        store.setBanUser(props.data.id).then(() => {
+            props.rerender();
+        })
+    };
+
+    const noban = () => {
+        store.setNoBanUser(props.data.id).then(() => {
+            props.rerender();
+        })
+    };
+
     return(
         <div className={styles.cardContaineer}>
             <div className={styles.cardContaineer__inform}>
-                <div className={styles.photoPlug} />
+                <div className={styles.photoPlugCont}>
+                    <img className={styles.photoPlug} src={`data:image/png;base64,${props.data.image}`} alt="avatar"/>
+                </div>
                 <div className={styles.informContaineer}>
                     <div className={styles.informContaineer__nc}>
-                        <p className={styles.informContaineer__nc_name}>Артем</p> 
-                        <p className={styles.informContaineer__nc_city}>Самара</p>
+                        <p className={styles.informContaineer__nc_name}>{props.data.name}</p> 
+                        <p className={styles.informContaineer__nc_city}>{props.data.city}</p>
                     </div>
-                    <p>20 лет, мужчина</p>
-                    <p>Скорпион</p>
+                    <p>{props.data.year}, {props.data.sex === 'М' ? 'мужчина' : 'женщина'}</p>
+                    <p>{props.data.zodiacSign}</p>
                     <div className={styles.informContaineer__description}> 
-                        <p>привет, я артем, тут крч описание будет, хех, че еще написать хз, вставлю сюда много текста, чтобы было понятно как выглядеть будет, вот еще текст, ну круто пока что выглядить, хз хз 
-                        привет, я артем, тут крч описание будет, хех, че еще написать хз, вставлю сюда много текста, чтобы было понятно как выглядеть будет, вот еще текст, ну круто пока что выглядить, хз хз 
-                        привет, я артем, тут крч описание будет, хех, че еще написать хз, вставлю сюда много текста, чтобы было понятно как выглядеть будет, вот еще текст, ну круто пока что выглядить, хз хз
-                        </p>
+                        <p>{props.data.description}</p>
                     </div>
                 </div>
             </div>
             <div className={styles.cardContaineer__complain}>
-                <p><span>Жалоба: </span>он плохой человк, хз че тут забыл ваще текст для жалобы надо сюда написать и побольше билин а то непонятно быудет как онеон будет выглядит ьемае а еще текст для жалобы надо сюда написать и побольше билин а то непонятно быудет как онеон будет выглядит ьемае</p>
+                <p><span>Жалоба: </span>{props.data.text}</p>
             </div>
             <div className={styles.cardContaineer__buttons}>
-                <ButtonA text={"Заблокировать"} />
-                <ButtonA text={"Не блокировать"} />
+                <ButtonA text={"Заблокировать"} onClick={ban}/>
+                <ButtonA text={"Не блокировать"} onClick={noban}/>
             </div>
         </div>
     );

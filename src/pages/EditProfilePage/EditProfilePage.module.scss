@@ -52,13 +52,61 @@
     align-items: center;
 }
 
+.inputImagePlaceholder {
+    width: 160px;
+    height: 210px;
+
+    position: absolute;
+
+    background-color: #F5F6F8;
+    border-radius: 10px;
+
+    background-image: url('../../img/photo2.svg');
+    z-index: 1;
+}
+
 .inputImageLabel {
     width: 160px;
     height: 210px;
 
     background-color: #F5F6F8;
     border-radius: 10px;
+
+    //opacity: 1 ;
+    position: absolute;
+
+    //background-image: url('../../img/photo2.svg');
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+    // & + .inputImageImg[src] {
+    //     opacity: 0;
+    //     z-index: 2;
+    // }
 }
+
+.inputImageImg {
+    
+    display: none;
+
+    &[src]{
+        display: block;
+        width: 160px;
+        height: 210px;
+
+        background-image: url('../../img/photo2.svg');
+        border-radius: 10px;
+        border: 0;
+        z-index: 2;
+        
+    }
+
+    &[src*="#"] {
+        display: none;
+    }
+}
+
+
 
 .inputImage{
     position: absolute;

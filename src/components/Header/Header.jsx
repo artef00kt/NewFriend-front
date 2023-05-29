@@ -14,6 +14,7 @@ const Header = (props) => {
     const goMyProfile = () => {navigate('/')}
     const goChats = () => {navigate('/chats')}
     const goFindFriend = () => {navigate('/findfriend')}
+    const goFriendsRequests = () => {navigate('/friendsrequests')}
 
     const goComplains = () => {navigate('/admin/complains')}
     const goVerifications = () => {navigate('/admin/verifications')}
@@ -30,7 +31,7 @@ const Header = (props) => {
                 <div className={styles.containeer}>
                     <div className={styles.leftHeader}>
                         <div className={styles.logo + " " + styles.headerLogo + " " + clickedLogo} onClick={props.type === "guest" ? goHome : goNowhere} />
-                        {props.type === "guest" || props.type === "newuser" ? 
+                        {props.type === "guest" || props.type === "newuser" || props.type === "waitinguser" || props.type === "lockuser" ? 
                         <></> : 
                         <>
                             {props.type === "admin" ? 
@@ -42,6 +43,7 @@ const Header = (props) => {
                                 <NavButton onClick={goMyProfile} text="Мой профиль"/>
                                 <NavButton onClick={goChats} text="Чаты"/>
                                 <NavButton onClick={goFindFriend} text="Поиск друзей"/>
+                                <NavButton onClick={goFriendsRequests} text="Заявки"/>
                             </>}
                         </>
                         }

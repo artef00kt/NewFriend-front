@@ -10,20 +10,19 @@ import UserScenarios from './scenarios/UserScenarios/UserScenarios.jsx'
 import AdminScenarios from './scenarios/AdminScenarios/AdminScenarios.jsx'
 
 import NewUserScenarios from './scenarios/UserScenarios/NewUserScenarios.jsx'
+import WaitingUserScenarios from './scenarios/UserScenarios/WaitingUserScenarios.jsx'
+import LockUserScenarios from './scenarios/UserScenarios/LockUserScenarios.jsx'
+
+
 
 
 
 function App() {
   const {store} = useContext(Context);
-  // useEffect(() =>{ 
-  //   store.checkAuth();
-  // }, []) 
-  
-  // console.log(store.user);
 
   useEffect(() => {
     store.checkAuth();
-  }, []);
+  }, [store.user.role]);
 
   const renderSwitch = (param) => {
     switch(param) {
@@ -32,15 +31,23 @@ function App() {
       case 'ROLE_ADMIN':
         return <AdminScenarios />;
       case 'ROLE_WAITING':
-        return 'в разработке епт';
+        return <WaitingUserScenarios />;
       case 'ROLE_LOCK':
-        return 'в разработке епт';
+        return <LockUserScenarios />;
       case 'ROLE_NEW':
         return <NewUserScenarios />;
       default:
         return <GuestScenarios />;
     }
   };
+
+  if (store.isLoading === true) {
+    return (
+      <div>
+        Загрузка...
+      </div>
+    );
+  }
 
   return (
     <div className={styles.app}>

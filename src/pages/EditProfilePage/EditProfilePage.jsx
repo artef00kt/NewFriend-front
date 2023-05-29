@@ -18,8 +18,8 @@ const EditProfilePage = (props) => {
     const goBack = () => { navigate(-1) }
 
     const [sexBtn, setSexBtn] = useState(true);
-    const manBtn = () => {setSexBtn(true); setFormData({...formData, sex: 'M'});};
-    const womanBtn = () => {setSexBtn(false); setFormData({...formData, sex: 'W'});};
+    const manBtn = () => {setSexBtn(true); setFormData({...formData, sex: 'М'});};
+    const womanBtn = () => {setSexBtn(false); setFormData({...formData, sex: 'Ж'});};
     const [formData, setFormData] = useState({
         login: store.user.login,
         'name': '',
@@ -27,41 +27,36 @@ const EditProfilePage = (props) => {
         city: '',
         image: '',
         description: '',
-        sex: 'M',
-        zodiacSign : "Скорпион",
+        sex: 'М',
     });
+    const [preview, setPreview] = useState('#')
 
     //const [fileData, setFileData] = useState();
 
     const onChangeForm = (e) => setFormData({...formData, [e.target.name]: e.target.value});
-    const onChangeFormFile = (e) => setFormData({...formData, [e.target.name]: e.target.files[0]});
-    const onImage = (e) => {
-        console.log(formData.image);
+    const onChangeFormFile = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.files[0]});
+        const objectUrl = URL.createObjectURL(e.target.files[0])
+        setPreview(objectUrl)
+    };
+
+    const onSubmitForm = (e) => {
+        e.preventDefault();
 
         const newForm = new FormData();
         newForm.append('login', formData.login)
         newForm.append('name', formData.name)
         newForm.append('image', formData.image);
-        //formData.image = newForm;
         newForm.append('sex', formData.sex)
         newForm.append('description', formData.description)
         newForm.append('birthdate', formData.birthdate)
         newForm.append('city', formData.city)
-        newForm.append('zodiacSign', formData.zodiacSign)
 
+        console.log(newForm);
+        store.sendUserData(newForm).then(() => store.user.role = 'ROLE_WAITING');
         
-
-        console.log(formData);
-        store.sendUserData(formData);
-
-    }
-
-    const onSubmitForm = (e) => {
-        e.preventDefault();
-
-        console.log(formData);
-        store.sendUserData(formData);
-        // console.log(sexBtn);
+        if (!nu)
+            navigate('/');
     }
 
     return (
@@ -110,7 +105,9 @@ const EditProfilePage = (props) => {
                     <InputImage 
                         onChange={onChangeFormFile}
                         name={"image"}
-                        id={"inputPhoto"}/>
+                        id={"inputPhoto"}
+                        preview={preview}/>
+                        
                 </div>
 
                 <InputTextAreaA 
@@ -125,11 +122,6 @@ const EditProfilePage = (props) => {
                         type={"button"}
                         text={"Отмена"}/>
                     }
-
-                    <ButtonA 
-                        onClick={onImage}
-                        type={"button"}
-                        text={"test"}/>
 
                     <ButtonA 
                         type={"submit"}
@@ -163,6 +155,8 @@ const InputImage = (props) => {
             <label className={styles.inputImageLabel}
                 htmlFor={props.id}
             ></label>
+            <img className={styles.inputImageImg} src={props.preview} htmlFor={props.id}/>
+            <div className={styles.inputImagePlaceholder}></div>
         </div>
         
     );

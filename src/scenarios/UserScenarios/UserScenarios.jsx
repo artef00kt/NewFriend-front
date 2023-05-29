@@ -5,8 +5,9 @@ import { observer } from 'mobx-react-lite';
 import Header from '../../components/Header/Header.jsx'
 import ErrorPage from '../../pages/ErrorPage/ErrorPage.jsx'
 
+import FriendsRequestsPage from '../../pages/FriendsRequestsPage/FriendsRequestsPage.jsx'
 
-
+import ComplainPage from '../../pages/ComplainPage/ComplainPage.jsx'
 import FindFriendPage from '../../pages/FindFriendPage/FindFriendPage.jsx'
 import ChatsPage from '../../pages/ChatsPage/ChatsPage.jsx'
 import ChatPlace from '../../pages/ChatsPage/ChatPlace/ChatPlace.jsx'
@@ -28,6 +29,9 @@ const UserScenarios = () => {
                 <Route path=":id" element={<ChatPlace />}/>
             </Route>
             <Route path="/findfriend" element={<FindFriendPage />}/>
+            <Route path="/sendcomplain/:id" element={<ComplainPage />}/>
+
+            <Route path="/friendsrequests" element={<FriendsRequestsPage />}/>
 
             <Route path="*" element={<ErrorPage />}/>
         </Route>

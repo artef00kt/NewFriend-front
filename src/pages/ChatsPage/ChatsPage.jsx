@@ -13,13 +13,17 @@ const ChatsPage = () => {
     const {id} = useParams();
 
     const [friendList, setFriendList] = useState([]);
+    const [newFriendList, setNewFriendList] = useState([]);
 
     const [rerender, setRerender] = useState(0);
 
     useEffect(() => {
         store.getUsers().then(response => {
-            //setFriendList(redataList(response, store.user.login));
             setFriendList(response);
+
+            store.getUsersEmpty().then(res => {
+                setNewFriendList(res);
+            });
         });
     }, [rerender]);
 
@@ -29,7 +33,13 @@ const ChatsPage = () => {
             <div className={styles.chatUsersList}>
                 {friendList.map((data, index) => 
                     <Link key={data.companion} to={`${data.companion}`} style={{ textDecoration: 'none' }}>
-                        <ChatUserCard act={data.companion.toString() === id} name={data.companionName} text={data.me ? "Ты: "+data.text : data.text} />
+                        <ChatUserCard act={data.companion.toString() === id} name={data.companionName} text={data.me ? "Ты: "+data.text : data.text} image={data.image}/>
+                    </Link>
+                )}
+
+                {newFriendList.map((data, index) => 
+                    <Link key={data.companion} to={`${data.companion}`} style={{ textDecoration: 'none' }}>
+                        <ChatUserCardEmpty act={data.companion.toString() === id} name={data.companionName} text={"Напишите первым!"} image={data.image}/>
                     </Link>
                 )}
             </div>
@@ -44,7 +54,9 @@ const ChatUserCard = ({act=false, children, ...props}) => {
     const stl = act ? styles.chatUserCard_act : styles.chatUserCard_noAct;
     return (
         <div className={styles.chatUserCard + " " + stl}>
-            <div className={styles.chatUserCard__photo} />
+            <div className={styles.chatUserCard__photoCont}>
+                <img  className={styles.chatUserCard__photo} src={`data:image/png;base64,${props.image}`} alt="avatar" />
+            </div>
             <div className={styles.chatUserCard__text}>
                 <p className={styles.chatUserCard__text_name}>{props.name}</p>
                 <p className={styles.chatUserCard__text_lastMessage}>{props.text}</p>
@@ -53,22 +65,19 @@ const ChatUserCard = ({act=false, children, ...props}) => {
     );
 }
 
-const redataList = (old_list, myLogin) => {
-    const new_list = [];
-    for (let i = 0; i < old_list.length; ++i) {
-        let obj = {}
-        if (old_list[i].sender === myLogin) {
-            obj.me = true;
-            obj.companion = old_list[i].recipient;
-        }
-        else {
-            obj.me = false;
-            obj.companion = old_list[i].sender;
-        }
-        obj.text = old_list[i].text;
-        new_list.push(obj);
-    }
-    return new_list;
-};
+const ChatUserCardEmpty = ({act=false, children, ...props}) => {
+    const stl = act ? styles.chatUserCard_act : styles.chatUserCard_noAct;
+    return (
+        <div className={styles.chatUserCard + " " + stl}>
+            <div className={styles.chatUserCard__photoCont}>
+                <img  className={styles.chatUserCard__photo} src={`data:image/png;base64,${props.image}`} alt="avatar" />
+            </div>
+            <div className={styles.chatUserCard__text}>
+                <p className={styles.chatUserCard__text_name}>{props.name}</p>
+                <p className={styles.chatUserCard__text_newfriend}>{props.text}</p>
+            </div>
+        </div>
+    );
+}
 
 export default observer(ChatsPage);

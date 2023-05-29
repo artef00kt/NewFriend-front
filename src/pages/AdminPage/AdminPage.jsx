@@ -1,5 +1,7 @@
-import { React } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import styles from './AdminPage.module.scss';
+
+import { Context } from '../../';
 
 import { useLocation } from 'react-router-dom';
 
@@ -10,9 +12,30 @@ import AdminVerificationCard from "../../components/AdminCard/AdminVerificationC
 
 const AdminPage = () => {
     const location = useLocation();
-    console.log(location.pathname);
+    //console.log(location.pathname);
     const isVerif = location.pathname === "/admin/verifications";
-    console.log(isVerif);
+    //console.log(isVerif);
+
+    const {store} = useContext(Context);
+
+    const [rerender, setRerender] = useState(0);
+    const rerend = () => {setRerender(rerender+1)}
+    const [usersDataList, setUsersDataList] = useState([]);
+
+    useEffect(() => {
+        if (isVerif) {
+            store.getVerificationsUsersList().then((res) => {
+                setUsersDataList(res);
+            });
+        }
+        else {
+            store.getComplaintsUsersList().then((res) => {
+                setUsersDataList(res);
+            });
+        }
+    }, [isVerif, rerender]);
+
+
 
     return(
         <div className={styles.contentContaineer + " " + styles.admin}>
@@ -22,17 +45,17 @@ const AdminPage = () => {
             <div className={styles.admin__cards}>
             {isVerif ?
             <>
-                <AdminVerificationCard/>
-                <AdminVerificationCard/>
-                <AdminVerificationCard/>
-                <AdminVerificationCard/>
+                {usersDataList.map((data, index) => 
+                    <AdminVerificationCard  key={index} data={data} rerender={rerend}/>
+                )}
+                {usersDataList.length === 0 ? <p className={styles.pinfo}>Список подтверждений пуст</p> : ""}
             </>
             :
             <>
-                <AdminComplainCard/>
-                <AdminComplainCard/>
-                <AdminComplainCard/>
-                <AdminComplainCard/>
+                {usersDataList.map((data, index) => 
+                    <AdminComplainCard  key={index} data={data} rerender={rerend}/>
+                )}
+                {usersDataList.length === 0 ? <p className={styles.pinfo}>Список жалоб пуст</p> : ""}
             </>
             }
             </div>

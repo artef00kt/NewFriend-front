@@ -1,20 +1,24 @@
 @import "../../components/StylesBase.scss";
 
-.photoPlug {
-    background: #FFFFFF;
-    background-image: url('https://sun7-22.userapi.com/impg/KLJUrOV4jf0hcP0-fL0exLX55R7ABbaDZoJhWg/p8C0ettpw1c.jpg?size=1365x2048&quality=95&sign=bd4b17982cb3f237310c843f538657b8&type=album');
-
-    background-size: 240px auto;
-
+.photoPlugCont {
     min-width: 240px;
     min-height: 315px;
 
     max-width: 240px;
     max-height: 315px;
 
-    // background: #FFFFFF;
     border-radius: 10px;
+
+    overflow: hidden;
+
+    background-color: #FFFFFF;
 }
+.photoPlug {
+    background-size: 240px auto;
+
+    width: 240px;
+}
+
 
 .cardContaineer {
     width: 1000px;
@@ -39,6 +43,7 @@
 
     &__complain{
         margin: 10px 0;
+        max-width: 960px;
         & > p {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -48,6 +53,8 @@
             line-height: 104%;
             letter-spacing: 2px;
             color: #414141;
+
+            overflow-wrap: break-word;
 
             & > span {
                 font-weight: 700;
@@ -87,8 +94,11 @@
             line-height: 104%;
             letter-spacing: 2px;
             color: #414141;
+
+            overflow-wrap: break-word;
         }
         height: 210px;
+        max-width: 700px;
         margin-top: 10px;
         overflow: auto;
     }
